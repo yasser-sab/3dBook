@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<style type="text/css">
+		body {
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.book {
+			position: relative;
+			
+			height: 400px;
+			width: 300px;
+			perspective: 1000px;
+			-webkit-perspective: 1000px;
+			transform-style: preserve-3d;
+		}
+
+		.cover,.body {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			color: white;
+		}
+
+		.cover {
+			transform-origin: top left;
+			transition: 1s transform;
+			transform-style: preserve-3d;
+			z-index: 1;
+		}
+
+		.cover .top,.cover .bottom{
+			backface-visibility: hidden;
+		}
+
+		.cover .top {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: orange;
+			z-index: 1;
+		}
+
+		.cover .top p{
+			display: inline-block;
+			border: 20px dotted transparent;
+			border-top-color: green;
+			border-bottom-width: 0px;
+			animation: sc 2s ease-in-out infinite;
+		}
+
+		.cover .bottom {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			background: blue;
+			transform: rotateY(-180deg);
+		}
+
+		.open {
+			transform: rotateY(-120deg);
+		}
+
+		.body {
+			background: red;
+		}
+
+		@keyframes sc{
+			0%,100%{
+				transform: translateY(0);
+			}
+			50%{
+				transform: translateY(10px);
+				opacity: .5;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+
+	<div class="book">
+		<div class="cover" id="c">
+			<div class="top">this is the cover
+				<p></p></div>
+			<div class="bottom">this is the bottom of the book</div>
+		</div>
+		<div class="body">
+			body
+		</div>
+	</div>
+
+<script type="text/javascript">
+	let c=document.getElementById('c');
+	c.addEventListener('click',function(){
+		c.classList.toggle('open');
+	});
+</script>
+</body>
+</html>
